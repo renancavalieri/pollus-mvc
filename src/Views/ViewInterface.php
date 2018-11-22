@@ -87,6 +87,32 @@ interface ViewInterface
     public function render(string $template, array $vars = []) : ResponseInterface;
     
     /**
+     * Renderiza uma página e não modifica o objeto de resposta da View, ao invés 
+     * disso retorna o conteúdo renderizado.
+     * 
+     * @param string $page Nome da página que será renderizada
+     * @param array $vars Variáveis a serem escritas na View, estas variáveis
+     * serão unidas com o vetor de variáveis existentes, priorizando as novas 
+     * variáveis sobre as variáveis existentes.
+     * 
+     * @return string;
+     */
+    public function renderWithoutResponse(string $template, array $vars = []) : string;
+    
+    /**
+     * Renderiza um bloco e não modifica o objeto de resposta da View, ao invés 
+     * disso retorna o conteúdo renderizado.
+     * 
+     * @param string $page Nome da página que será renderizada
+     * @param array $vars Variáveis a serem escritas na View, estas variáveis
+     * serão unidas com o vetor de variáveis existentes, priorizando as novas 
+     * variáveis sobre as variáveis existentes.
+     * 
+     * @return string;
+     */
+    public function renderBlockWithoutResponse(string $template, array $vars = []) : string;
+    
+    /**
      * Renderiza um bloco de uma página e escreve no {@see ResponseInterface}
      * 
      * @param string $template Nome da página que contém o bloco

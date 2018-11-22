@@ -101,6 +101,22 @@ class TwigView extends BaseView implements ViewInterface
         $this->twig = $twig;
     }
 
-   
+    /**
+     * {@inheritDoc}
+     */
+    public function renderBlockWithoutResponse($template, array $vars = array()): string
+    {
+        $data = array_merge($this->vars, $vars);
+        return $this->getTwig()->loadTemplate($template)->renderBlock($template, $data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function renderWithoutResponse($template, array $vars = array()): string
+    {
+        $data = array_merge($this->vars, $vars);
+        return $this->getTwig()->render($template, $data);
+    }
 
 }
