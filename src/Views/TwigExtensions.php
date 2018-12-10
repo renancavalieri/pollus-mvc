@@ -25,7 +25,7 @@ class TwigExtensions extends AbstractExtension
         return
         [
             new TwigFunction('asset', [$this, 'asset'], ['is_safe' => ['html']]),
-            new TwigFunction('url', [$this, 'url'])
+            new TwigFunction('url', [$this, 'url'], ['is_safe' => ['html']])
         ];
     }
 
@@ -72,20 +72,22 @@ class TwigExtensions extends AbstractExtension
     }
     
     /**
-     * Resolve uma URL relativa detectando subdiretórios
-     * 
      * @param string $url
-     * @return type
+     * @param array $query
+     * @return string
      */
-    public function url(string $url = "")
+    public function url(string $url = "", ?array $query = null)
     {
-        if (strpos($url, "://") !== false) 
+        if (!(strpos($url, "://") !== false)) 
         {
-            return $url;
+            $url = htmlentities(rtrim(dirname($_SERVER["PHP_SELF"] ?? ""), "/") . "/" . ltrim($url, "/"), ENT_NOQUOTES, 'utf-8');
         }
         
-        return rtrim(dirname($_SERVER["PHP_SELF"] ?? ""), "/") . "/" . ltrim($url, "/");
-    }
+        if ($query !== null)
+        {
+            $url .= "?" . http_build_query($query);
+        }
         
-        
+        return $url;
+    }        
 }
