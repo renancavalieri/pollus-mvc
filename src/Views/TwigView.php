@@ -70,7 +70,7 @@ class TwigView extends BaseView implements ViewInterface
             throw new NullResponseException("O objeto de resposta não foi fornecido");
         }
         $data = array_merge($this->vars, $vars);
-        $html = $this->getTwig()->loadTemplate($template)->renderBlock($template, $data);
+        $html = $this->getTwig()->loadTemplate($template)->renderBlock($block, $data);
         $this->response->getBody()->write($html);
         $newResponse = $this->response->withHeader
         (
