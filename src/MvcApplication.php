@@ -18,7 +18,7 @@ use Pollus\Mvc\ApplicationInterfaces\WebAppInterface;
 /**
  * Mvc Application Base
  */
-abstract class Application implements ApplicationInterface
+abstract class MvcApplication implements ApplicationInterface
 {
     /**
      * Executes the application
